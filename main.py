@@ -47,6 +47,7 @@ class DoublyLinkedList:
             The updated list.
         """
         node = Node(value)
+        self.count += 1
         if self.head is None:
           self.head = node
           self.tail = node
@@ -57,6 +58,7 @@ class DoublyLinkedList:
           self.tail = node
           self.tail.next = None
           old_tail.next = self.tail
+          self.tail.prev = old_tail
 
     def prepend(self, value):
         """Adds a new node to the beginning of the list.
@@ -68,6 +70,7 @@ class DoublyLinkedList:
             The updated list.
         """
         node = Node(value)
+        self. count += 1
         if self.head is None:
           self.head = node
           self.tail = node
@@ -75,6 +78,7 @@ class DoublyLinkedList:
           old_head = self.head
           self.head = node
           self.head.next = old_head
+          old_head.prev = self.head
 
     def insert(self, index, value):
         """Inserts a new node at the specified index.
@@ -86,7 +90,33 @@ class DoublyLinkedList:
         Returns:
             The updated list.
         """
-        pass
+        self.count += 1
+        if index < 0:
+          return self
+
+        node = Node(value)
+
+        if index == 0:
+          self.prepend(value)
+
+        curr = self.head
+        start = 0
+
+        while curr is not None and start < index:
+          curr = curr.next
+          start += 1
+
+        if curr is None:
+          self.append(value)
+        else:
+          prev = curr.prev
+          node.next = curr
+          node.prev = prev
+          curr.prev = node
+          if prev is not None:
+            prev.next = node
+
+        return self
 
     def pop(self):
         """Removes and returns the last node in the list.
@@ -140,4 +170,5 @@ ll.append(2)
 ll.append(3)
 ll.append(4)
 ll.prepend(100)
+ll.insert(1,25125)
 print(ll)

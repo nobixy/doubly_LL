@@ -124,6 +124,7 @@ class DoublyLinkedList:
         Returns:
             The removed node.
         """
+        self.count -= 1
         if self.tail is not None:
           popped = self.tail
           temp = self.tail.prev
@@ -141,7 +142,18 @@ class DoublyLinkedList:
         Returns:
             The removed node.
         """
-        pass
+        start = 0
+        curr = self.head
+        while curr is not None and start < index:
+          curr = curr.next
+          start += 1
+
+        if start == index:
+          print("delete start == idx")
+          prev = curr.prev
+          nex = curr.next
+          prev.next = nex
+          nex.prev = prev
 
     def search(self, value):
         """Finds the index of the first node containing the value.
@@ -179,4 +191,5 @@ ll.prepend(100)
 ll.insert(1,25125)
 ll.pop()
 ll.pop()
+ll.delete(1)
 print(ll)

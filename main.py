@@ -19,6 +19,9 @@ class Node:
         Args:
             value: The data to store in the node.
         """
+        self.value = value
+        self.prev = None
+        self.next = None
 
 class DoublyLinkedList:
     """Doubly linked list data structure.
@@ -29,15 +32,10 @@ class DoublyLinkedList:
         length: Number of nodes in the list.
     """
 
-    def __init__(self, value):
-        """Initializes the list with a single node.
-
-        Args:
-            value: The data for the initial node.
-        """
-        pass
-
-    # MVP Methods
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
 
     def append(self, value):
         """Adds a new node to the end of the list.
@@ -48,7 +46,17 @@ class DoublyLinkedList:
         Returns:
             The updated list.
         """
-        pass
+        node = Node(value)
+        if self.head is None:
+          self.head = node
+          self.tail = node
+          self.head.next = None
+          self.tail.next = None
+        else:
+          old_tail = self.tail
+          self.tail = node
+          self.tail.next = None
+          old_tail.next = self.tail
 
     def prepend(self, value):
         """Adds a new node to the beginning of the list.
@@ -59,7 +67,14 @@ class DoublyLinkedList:
         Returns:
             The updated list.
         """
-        pass
+        node = Node(value)
+        if self.head is None:
+          self.head = node
+          self.tail = node
+        else:
+          old_head = self.head
+          self.head = node
+          self.head.next = old_head
 
     def insert(self, index, value):
         """Inserts a new node at the specified index.
@@ -102,3 +117,27 @@ class DoublyLinkedList:
             The index of the node, or -1 if not found.
         """
         pass
+
+    def __str__(self):
+      if self.head is None:
+        return "Empty"
+
+      res = "LinkedList: "
+      curr = self.head
+      while curr is not None: # The end of the linked is is a null pointer to None
+        res += str(curr.value)
+        if curr.next is not None:
+          res += " <---> "
+        elif curr.next is None:
+          res += " ---> None "
+        curr = curr.next
+      return res
+
+ll = DoublyLinkedList()
+ll.prepend(101)
+ll.append(1)
+ll.append(2)
+ll.append(3)
+ll.append(4)
+ll.prepend(100)
+print(ll)

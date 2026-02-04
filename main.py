@@ -131,7 +131,6 @@ class DoublyLinkedList:
           self.tail.prev = None
           self.tail = temp
           self.tail.next = None
-          print(temp)
 
     def delete(self, index):
         """Removes the node at the specified index.
@@ -149,7 +148,6 @@ class DoublyLinkedList:
           start += 1
 
         if start == index:
-          print("delete start == idx")
           prev = curr.prev
           nex = curr.next
           prev.next = nex
@@ -164,7 +162,16 @@ class DoublyLinkedList:
         Returns:
             The index of the node, or -1 if not found.
         """
-        pass
+        curr = self.head
+        index = 0
+        while curr.value != value:
+          curr = curr.next
+          index += 1
+
+        if curr.value == value:
+          print(index)
+        else:
+          return -1
 
     def __str__(self):
       if self.head is None:
@@ -190,6 +197,6 @@ ll.append(4)
 ll.prepend(100)
 ll.insert(1,25125)
 ll.pop()
-ll.pop()
 ll.delete(1)
+ll.search(3)
 print(ll)

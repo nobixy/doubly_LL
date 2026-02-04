@@ -124,7 +124,12 @@ class DoublyLinkedList:
         Returns:
             The removed node.
         """
-        pass
+        if self.tail is not None:
+          popped = self.tail
+          temp = self.tail.prev
+          self.tail.prev = None
+          temp.next = None
+          print(popped.value)
 
     def delete(self, index):
         """Removes the node at the specified index.
@@ -171,4 +176,5 @@ ll.append(3)
 ll.append(4)
 ll.prepend(100)
 ll.insert(1,25125)
+ll.pop()
 print(ll)

@@ -128,8 +128,9 @@ class DoublyLinkedList:
           popped = self.tail
           temp = self.tail.prev
           self.tail.prev = None
-          temp.next = None
-          print(popped.value)
+          self.tail = temp
+          self.tail.next = None
+          print(temp)
 
     def delete(self, index):
         """Removes the node at the specified index.
@@ -176,5 +177,6 @@ ll.append(3)
 ll.append(4)
 ll.prepend(100)
 ll.insert(1,25125)
+ll.pop()
 ll.pop()
 print(ll)
